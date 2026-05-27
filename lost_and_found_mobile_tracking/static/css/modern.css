@@ -139,9 +139,9 @@ img {
 /* ── Layout Containers ── */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 40px;
 }
 
 .section {
@@ -588,6 +588,7 @@ textarea.form-control {
 }
 
 @media (max-width: 768px) {
+    .container, .wrap { padding: 0 20px; }
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
     .navbar-inner { padding: 0; }
     .nav-links { display: none; }
@@ -666,7 +667,7 @@ footer {
 }
 
 /* ── Specific Overrides for Existing Classes (Compatibility) ── */
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.wrap { max-width: 1600px; margin: 0 auto; padding: 0 40px; }
 .nav { display: flex; align-items: center; height: 72px; }
 .btn-outline { background-color: transparent; border: 1px solid var(--border-subtle); color: var(--text-primary); }
 .btn-outline:hover { background-color: var(--border-subtle); border-color: var(--text-muted); }
