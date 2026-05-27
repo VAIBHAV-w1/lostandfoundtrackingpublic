@@ -139,9 +139,9 @@ img {
 /* ── Layout Containers ── */
 .container {
     width: 100%;
-    max-width: 1600px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 4%;
 }
 
 .section {
@@ -667,7 +667,7 @@ footer {
 }
 
 /* ── Specific Overrides for Existing Classes (Compatibility) ── */
-.wrap { max-width: 1600px; margin: 0 auto; padding: 0 40px; }
+.wrap { max-width: 100%; margin: 0 auto; padding: 0 4%; }
 .nav { display: flex; align-items: center; height: 72px; }
 .btn-outline { background-color: transparent; border: 1px solid var(--border-subtle); color: var(--text-primary); }
 .btn-outline:hover { background-color: var(--border-subtle); border-color: var(--text-muted); }
