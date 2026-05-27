@@ -1,0 +1,94 @@
+{% extends 'tracker/base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Verify Identity — LostFound" %}{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper animate-slide-up" style="min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center;">
+    <div class="card auth-card" style="box-shadow: 0 32px 64px -16px rgba(0,0,0,0.3); border-radius: var(--radius-xl); max-width: 440px;">
+        <div class="card-header" style="flex-direction: column; align-items: center; text-align: center; padding: 48px 40px 24px; border: none;">
+            <div class="logo-icon" style="width: 56px; height: 56px; margin-bottom: 24px; font-size: 1.5rem; background: var(--brand-accent);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            
+            {% if verified %}
+                <h2 style="font-size: 2rem; margin-bottom: 8px; color: var(--status-found);">{% trans "Verified" %}</h2>
+                <p style="font-size: 0.95rem; color: var(--text-secondary);">{% trans "Your identity has been confirmed. Please set your new password below." %}</p>
+            {% else %}
+                <h2 style="font-size: 2rem; margin-bottom: 8px;">{% trans "Verification Code" %}</h2>
+                <p style="font-size: 0.95rem; color: var(--text-secondary);">{% trans "We've sent a 6-digit code to your email." %}</p>
+                <div style="margin-top: 12px; font-weight: 700; color: var(--text-primary); font-family: monospace;">{{ user_email }}</div>
+            {% endif %}
+        </div>
+
+        <div class="card-body" style="padding: 0 40px 48px;">
+            {% if verified %}
+                <form method="post" action="{% url 'tracker:forgot_password' %}" class="grid" style="gap: 20px;">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="form-label">{% trans "New Password" %}</label>
+                        <input type="password" name="new_password" class="form-control form-control-lg" placeholder="••••••••" required style="height: 52px;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; height: 56px; font-size: 1.1rem; margin-top: 12px;">
+                        {% trans "Reset Password" %}
+                    </button>
+                </form>
+            {% else %}
+                <form method="post" class="grid" style="gap: 24px;">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div style="display: flex; gap: 12px; justify-content: center;" id="otp-container">
+                            <input type="text" name="otp_code" class="form-control" maxlength="6" placeholder="000000" required style="height: 64px; font-size: 2rem; text-align: center; letter-spacing: 0.5em; font-family: 'Outfit', sans-serif; font-weight: 800; border-width: 2px;">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; height: 56px; font-size: 1.1rem; margin-top: 8px;">
+                        {% trans "Verify Code" %}
+                    </button>
+                </form>
+
+                <div style="margin-top: 32px; text-align: center;">
+                    <button type="button" onclick="resendOTP()" id="resend-btn" class="btn btn-ghost btn-sm" style="font-weight: 700; color: var(--brand-primary);">
+                        {% trans "Resend Verification Code" %}
+                    </button>
+                    <p id="resend-timer" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px; display: none;">
+                        {% trans "Wait" %} <span id="timer-sec">30</span>s {% trans "to resend" %}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function resendOTP() {
+        const btn = document.getElementById('resend-btn');
+        const timer = document.getElementById('resend-timer');
+        const secSpan = document.getElementById('timer-sec');
+        
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        
+        fetch("{% url 'tracker:resend_otp' %}")
+            .then(r => r.json())
+            .then(d => {
+                if (d.success) {
+                    timer.style.display = 'block';
+                    let timeLeft = 30;
+                    const interval = setInterval(() => {
+                        timeLeft--;
+                        secSpan.innerText = timeLeft;
+                        if (timeLeft <= 0) {
+                            clearInterval(interval);
+                            btn.disabled = false;
+                            btn.style.opacity = '1';
+                            timer.style.display = 'none';
+                        }
+                    }, 1000);
+                } else {
+                    alert(d.message);
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                }
+            });
+    }
+</script>
+{% endblock %}

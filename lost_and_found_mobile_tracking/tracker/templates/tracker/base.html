@@ -1,0 +1,170 @@
+{% load static i18n %}
+{% get_current_language as LANG_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANG_CODE }}" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LostFound — Professional Recovery Network{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/modern.css' %}">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="animate-fade">
+    <div class="page-wrapper">
+
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="{% url 'tracker:home' %}" class="logo">
+                <div class="logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span>LostFound</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="{% url 'tracker:home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">{% trans "Home" %}</a>
+                <a href="{% url 'tracker:search' %}" class="nav-link {% if 'search' in request.path %}active{% endif %}">{% trans "Search Items" %}</a>
+                <a href="{% url 'tracker:report_item' %}" class="nav-link {% if 'report' in request.path %}active{% endif %}">{% trans "Report Item" %}</a>
+                <a href="{% url 'tracker:contact' %}" class="nav-link {% if 'contact' in request.path %}active{% endif %}">{% trans "Contact" %}</a>
+                <a href="{% url 'tracker:about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">{% trans "About" %}</a>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Language Selector -->
+                <div class="dropdown" style="position: relative;">
+                    <button class="btn btn-ghost btn-sm" onclick="this.nextElementSibling.classList.toggle('show')" style="text-transform: uppercase;">
+                        {{ LANG_CODE }}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu" style="display: none; position: absolute; top: 100%; right: 0; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: 8px; z-index: 1001; min-width: 120px;">
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                            <button name="language" value="en" class="btn btn-ghost btn-sm" style="width: 100%; justify-content: flex-start;">English</button>
+                            <button name="language" value="hi" class="btn btn-ghost btn-sm" style="width: 100%; justify-content: flex-start;">हिंदी</button>
+                            <button name="language" value="kn" class="btn btn-ghost btn-sm" style="width: 100%; justify-content: flex-start;">ಕನ್ನಡ</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button class="btn btn-ghost btn-sm" onclick="toggleTheme()" title="{% trans 'Toggle Theme' %}">
+                    <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'tracker:profile' %}" class="btn btn-secondary btn-sm">{% trans "Dashboard" %}</a>
+                    <form action="{% url 'tracker:logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-ghost btn-sm">{% trans "Sign Out" %}</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'tracker:login' %}" class="btn btn-ghost btn-sm">{% trans "Sign in" %}</a>
+                    <a href="{% url 'tracker:signup' %}" class="btn btn-primary btn-sm">{% trans "Get started" %}</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="section">
+        <div class="container">
+            {% if messages %}
+                <div class="messages-container" style="margin-bottom: 32px;">
+                    {% for message in messages %}
+                        <div class="card animate-slide-up" style="padding: 16px 24px; border-left: 4px solid {% if message.tags == 'success' %}var(--status-found){% elif message.tags == 'error' %}var(--status-lost){% else %}var(--brand-primary){% endif %}; margin-bottom: 12px; background: var(--bg-card);">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <div class="logo-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <span>LostFound</span>
+                    </a>
+                    <p class="footer-tagline">{% trans "A community-driven platform for finding lost items and returning found ones to their rightful owners." %}</p>
+                </div>
+                <div class="footer-links">
+                    <h4>{% trans "Platform" %}</h4>
+                    <ul>
+                        <li><a href="{% url 'tracker:home' %}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'tracker:search' %}">{% trans "Search Items" %}</a></li>
+                        <li><a href="{% url 'tracker:report_item' %}">{% trans "Report Item" %}</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>{% trans "Company" %}</h4>
+                    <ul>
+                        <li><a href="{% url 'tracker:about' %}">{% trans "About Us" %}</a></li>
+                        <li><a href="{% url 'tracker:contact' %}">{% trans "Contact Support" %}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 LostFound. {% trans "All rights reserved." %}</div>
+                <div style="display: flex; gap: 24px;">
+                    <a href="#">{% trans "Privacy Policy" %}</a>
+                    <a href="#">{% trans "Terms of Service" %}</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .dropdown-menu.show { display: block !important; }
+    </style>
+
+    <script>
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateIcons();
+        }
+
+        function updateIcons() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const sun = document.querySelector('.sun-icon');
+            const moon = document.querySelector('.moon-icon');
+            if (sun && moon) {
+                if (theme === 'light') {
+                    sun.style.display = 'none';
+                    moon.style.display = 'block';
+                } else {
+                    sun.style.display = 'block';
+                    moon.style.display = 'none';
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', updateIcons);
+        
+        // Close dropdowns on outside click
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+            }
+        });
+    </script>
+    </div> <!-- end page-wrapper -->
+</body>
+</html>
+

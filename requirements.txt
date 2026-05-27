@@ -1,0 +1,6 @@
+Django>=5.2.6
+Pillow>=10.2.0
+asgiref
+sqlparse
+tzdata
+leafmap

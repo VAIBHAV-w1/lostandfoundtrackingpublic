@@ -1,0 +1,169 @@
+{% extends 'tracker/base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Home Dashboard — LostFound" %}{% endblock %}
+
+{% block content %}
+<div class="page-header animate-slide-up" style="margin-bottom: 48px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <p style="color: var(--brand-primary); font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; margin-bottom: 8px;">{% trans "Real-time Network Activity" %}</p>
+            <h1>{% trans "Global Recovery Monitor" %}</h1>
+            <p style="color: var(--text-secondary); max-width: 500px; margin-top: 8px;">{% trans "Monitor asset recovery and coordination efforts across the grid." %}</p>
+        </div>
+        <a href="{% url 'tracker:report_item' %}" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            {% trans "Report Item" %}
+        </a>
+    </div>
+</div>
+
+<div class="stats-grid animate-slide-up delay-1" style="margin-bottom: 48px;">
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99, 102, 241, 0.05) 100%);">
+        <div class="stat-icon" style="background: var(--brand-primary); color: white; box-shadow: var(--shadow-glow);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">{{ stats.total_active|default:"0" }}</div>
+            <div class="stat-label">{% trans "Active Records" %}</div>
+        </div>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(244, 63, 94, 0.05) 100%);">
+        <div class="stat-icon" style="background: var(--status-lost); color: white;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">{{ lost_count|default:"0" }}</div>
+            <div class="stat-label">{% trans "Lost Assets" %}</div>
+        </div>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 185, 129, 0.05) 100%);">
+        <div class="stat-icon" style="background: var(--status-found); color: white;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">{{ found_count|default:"0" }}</div>
+            <div class="stat-label">{% trans "Found Items" %}</div>
+        </div>
+    </div>
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(6, 182, 212, 0.05) 100%);">
+        <div class="stat-icon" style="background: var(--brand-accent); color: white;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div class="stat-info">
+            <div class="stat-value">{{ stats.total_resolved|default:"0" }}</div>
+            <div class="stat-label">{% trans "Resolved" %}</div>
+        </div>
+    </div>
+</div>
+
+<div class="grid-2 animate-slide-up delay-2" style="grid-template-columns: 1.6fr 1fr; gap: 40px;">
+    <!-- Map Section -->
+    <div class="card" style="height: 100%; min-height: 500px;">
+        <div class="card-header">
+            <h3 class="card-title">{% trans "Interactive Map" %}</h3>
+            <div style="display: flex; gap: 8px;">
+                <span class="badge" style="background: var(--status-lost-bg); color: var(--status-lost);">{% trans "Lost" %}</span>
+                <span class="badge" style="background: var(--status-found-bg); color: var(--status-found);">{% trans "Found" %}</span>
+            </div>
+        </div>
+        <div class="card-body" style="padding: 0; flex: 1;">
+            <div id="map" class="map-container" style="height: 100%; min-height: 500px; border: none; border-radius: 0;"></div>
+        </div>
+    </div>
+
+    <!-- Latest activity Section -->
+    <div class="card" style="height: 100%;">
+        <div class="card-header">
+            <h3 class="card-title">{% trans "Latest Activity" %}</h3>
+            <a href="{% url 'tracker:search' %}" class="btn btn-ghost btn-sm">{% trans "Explore" %} →</a>
+        </div>
+        <div class="card-body" style="padding: 0; max-height: 600px; overflow-y: auto;">
+            <div class="list-group">
+                {% for report in recent_reports %}
+                    <div class="list-item" onclick="location.href='{% url 'tracker:report_detail' report.id %}'" style="padding: 20px 24px;">
+                        <div class="list-item-thumb" style="width: 56px; height: 56px; border-radius: var(--radius-md); overflow: hidden; background: var(--bg-main);">
+                            {% if report.photo %}
+                                <img src="{{ report.photo.url }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="list-item-content">
+                            <div class="list-item-title" style="font-size: 1.1rem;">{{ report.title }}</div>
+                            <div class="list-item-subtitle" style="margin-top: 4px; display: flex; align-items: center; gap: 6px;">
+                                <span style="font-weight: 700; color: {% if report.report_type == 'lost' %}var(--status-lost){% else %}var(--status-found){% endif %}; text-transform: uppercase; font-size: 0.7rem;">{{ report.get_report_type_display }}</span>
+                                <span style="color: var(--text-muted);">•</span>
+                                <span>{{ report.get_category_display }}</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">{{ report.date_reported|timesince }}</div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div style="padding: 80px 24px; text-align: center; color: var(--text-muted);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px; opacity: 0.3;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <p style="font-weight: 600;">{% trans "The grid is currently empty." %}</p>
+                        <p style="font-size: 0.85rem; margin-top: 8px;">{% trans "New reports will appear here in real-time." %}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map Scripts -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const mapStyle = isDark ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        
+        const map = L.map('map', {
+            scrollWheelZoom: false,
+            zoomControl: false,
+            attributionControl: false
+        }).setView([15.3173, 75.7139], 7);
+        
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        L.tileLayer(mapStyle).addTo(map);
+
+        const reports = [
+            {% for report in map_reports %}
+                {% if report.latitude and report.longitude %}
+                    {
+                        lat: {{ report.latitude }},
+                        lng: {{ report.longitude }},
+                        title: "{{ report.title|escapejs }}",
+                        type: "{{ report.report_type }}",
+                        url: "{% url 'tracker:report_detail' report.id %}"
+                    },
+                {% endif %}
+            {% endfor %}
+        ];
+
+        reports.forEach(r => {
+            const color = r.type === 'lost' ? '#f43f5e' : '#10b981';
+            const marker = L.circleMarker([r.lat, r.lng], {
+                radius: 8,
+                fillColor: color,
+                color: '#fff',
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 0.9
+            }).addTo(map);
+            
+            marker.bindPopup(`
+                <div style="padding: 12px; font-family: 'Plus Jakarta Sans', sans-serif;">
+                    <a href="${r.url}" style="color:var(--text-primary); font-weight:800; font-size:15px; text-decoration:none; display:block; margin-bottom:4px;">${r.title}</a>
+                    <div style="font-size:10px; text-transform:uppercase; font-weight:900; letter-spacing:0.1em; color:${color}">${r.type}</div>
+                </div>
+            `);
+        });
+    });
+</script>
+{% endblock %}

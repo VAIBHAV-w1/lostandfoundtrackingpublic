@@ -1,0 +1,280 @@
+{% extends 'tracker/base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Report Item — LostFound" %}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+    .type-toggle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    .type-option {
+        cursor: pointer;
+        border: 2px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 16px;
+        text-align: center;
+        transition: var(--transition-base);
+        font-weight: 700;
+        background: var(--bg-card);
+    }
+    .type-option:hover {
+        border-color: var(--brand-primary);
+        background: rgba(99, 102, 241, 0.05);
+    }
+    input[type="radio"]:checked + .type-option.lost {
+        border-color: var(--status-lost);
+        background: var(--status-lost-bg);
+        color: var(--status-lost);
+        box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
+    }
+    input[type="radio"]:checked + .type-option.found {
+        border-color: var(--status-found);
+        background: var(--status-found-bg);
+        color: var(--status-found);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header animate-slide-up" style="margin-bottom: 48px;">
+    <p style="color: var(--brand-primary); font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; margin-bottom: 8px;">{% trans "New Report" %}</p>
+    <h1>{% trans "Report an Item" %}</h1>
+    <p style="color: var(--text-secondary); max-width: 600px; margin-top: 12px;">{% trans "Help the community by providing accurate details about the item." %}</p>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="grid-2 animate-slide-up delay-1" style="gap: 48px; align-items: start; grid-template-columns: 1.2fr 1fr;">
+    {% csrf_token %}
+    
+    <div class="grid" style="gap: 32px;">
+        <!-- Core Details -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% trans "Item Information" %}</h3>
+            </div>
+            <div class="card-body grid" style="gap: 24px;">
+                <div class="form-group">
+                    <label class="form-label">{% trans "Is this Lost or Found?" %}</label>
+                    <div class="type-toggle">
+                        <label>
+                            <input type="radio" name="report_type" value="lost" checked style="display: none;">
+                            <div class="type-option lost">{% trans "I Lost Something" %}</div>
+                        </label>
+                        <label>
+                            <input type="radio" name="report_type" value="found" style="display: none;">
+                            <div class="type-option found">{% trans "I Found Something" %}</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">{% trans "Item Name" %}</label>
+                    <input type="text" name="title" class="form-control form-control-lg" placeholder="{% trans 'e.g. Blue Backpack, iPhone 13' %}" required>
+                </div>
+
+                <div class="grid-2" style="gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Category" %}</label>
+                        <select name="category" class="form-control" required>
+                            {% for code, name in categories %}
+                                <option value="{{ code }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Date" %}</label>
+                        <input type="date" name="item_date" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">{% trans "Item Description" %}</label>
+                    <textarea name="description" class="form-control" placeholder="{% trans 'Provide unique details, marks, or serial numbers...' %}" required style="min-height: 150px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% trans "Contact Details" %}</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label">{% trans "How can people reach you?" %}</label>
+                    <textarea name="contact_info" class="form-control" placeholder="{% trans 'Phone number or email for recovery coordination...' %}" required style="min-height: 100px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid" style="gap: 32px;">
+        <!-- Visual Evidence -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% trans "Item Photo" %}</h3>
+            </div>
+            <div class="card-body">
+                <div style="border: 2px dashed var(--border-subtle); border-radius: var(--radius-lg); padding: 48px; text-align: center; cursor: pointer; transition: var(--transition-base); background: rgba(255,255,255,0.02);" onclick="this.nextElementSibling.click()" id="upload-zone">
+                    <div id="upload-icon" style="margin-bottom: 16px; color: var(--brand-primary);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div style="font-weight: 700; font-size: 1.1rem; color: var(--text-primary);">{% trans "Upload Photo" %}</div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">{% trans "High-quality images help identification." %}</p>
+                </div>
+                <input type="file" name="photo" style="display: none;" onchange="previewImg(this)">
+                <div id="img-preview" style="display: none; margin-top: 24px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); position: relative;">
+                    <img src="" style="width: 100%; height: 280px; object-fit: cover;">
+                    <button type="button" onclick="resetImg()" style="position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.5); color: white; border: none; padding: 8px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(4px);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% trans "Item Location" %}</h3>
+            </div>
+            <div class="card-body">
+                <div id="map" class="map-container" style="height: 320px; margin-bottom: 24px; border-radius: var(--radius-md);"></div>
+                
+                <div id="loc-status" style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 24px; padding: 16px; background: var(--bg-main); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                    <div class="pulse-dot" style="width: 10px; height: 10px; background: var(--brand-primary); border-radius: 50%; box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.1);"></div>
+                    <span id="loc-text">{% trans "Pinpoint location on map..." %}</span>
+                </div>
+
+                <button type="button" id="btn-detect-location" class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 24px; gap: 8px; height: 44px; justify-content: center; font-size: 0.9rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+                    {% trans "Get Accurate Location" %}
+                </button>
+
+                <input type="hidden" name="latitude" id="id_latitude">
+                <input type="hidden" name="longitude" id="id_longitude">
+                
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label">{% trans "Address" %}</label>
+                    <input type="text" name="location_name" id="id_location_name" class="form-control" placeholder="{% trans 'Search or drag pin...' %}" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; height: 64px; font-size: 1.25rem;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            {% trans "Submit Report" %}
+        </button>
+    </div>
+</form>
+
+<script>
+    function previewImg(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('img-preview');
+                const zone = document.getElementById('upload-zone');
+                preview.style.display = 'block';
+                preview.querySelector('img').src = e.target.result;
+                zone.style.display = 'none';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function resetImg() {
+        const preview = document.getElementById('img-preview');
+        const zone = document.getElementById('upload-zone');
+        const input = document.querySelector('input[name="photo"]');
+        preview.style.display = 'none';
+        zone.style.display = 'block';
+        input.value = "";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const mapStyle = isDark ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+        const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([15.3173, 75.7139], 7);
+        L.tileLayer(mapStyle).addTo(map);
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        let marker = L.marker([15.3173, 75.7139], {draggable: true}).addTo(map);
+
+        function updateFields(lat, lng) {
+            document.getElementById('id_latitude').value = lat;
+            document.getElementById('id_longitude').value = lng;
+            
+            const locText = document.getElementById('loc-text');
+            locText.innerText = "{% trans 'Resolving address...' %}";
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById('id_location_name').value = d.display_name;
+                    locText.innerText = "{% trans 'Location Verified' %}";
+                    document.querySelector('.pulse-dot').style.background = 'var(--status-found)';
+                })
+                .catch(() => {
+                    locText.innerText = "{% trans 'Location Set' %}";
+                });
+        }
+
+        marker.on('dragend', function(e) {
+            const pos = e.target.getLatLng();
+            updateFields(pos.lat, pos.lng);
+        });
+
+        map.on('click', function(e) {
+            marker.setLatLng(e.latlng);
+            updateFields(e.latlng.lat, e.latlng.lng);
+        });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(p => {
+                const lat = p.coords.latitude;
+                const lng = p.coords.longitude;
+                map.setView([lat, lng], 13);
+                marker.setLatLng([lat, lng]);
+                updateFields(lat, lng);
+            });
+        }
+
+        const detectBtn = document.getElementById('btn-detect-location');
+        if (detectBtn) {
+            detectBtn.addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    const locText = document.getElementById('loc-text');
+                    locText.innerText = "{% trans 'Detecting accurate location...' %}";
+                    document.querySelector('.pulse-dot').style.background = 'var(--brand-primary)';
+                    
+                    navigator.geolocation.getCurrentPosition(
+                        p => {
+                            const lat = p.coords.latitude;
+                            const lng = p.coords.longitude;
+                            map.setView([lat, lng], 15);
+                            marker.setLatLng([lat, lng]);
+                            updateFields(lat, lng);
+                        },
+                        err => {
+                            locText.innerText = "{% trans 'Geolocation failed or denied.' %}";
+                            console.error(err);
+                        },
+                        {
+                            enableHighAccuracy: true,
+                            timeout: 10000,
+                            maximumAge: 0
+                        }
+                    );
+                } else {
+                    alert("{% trans 'Geolocation is not supported by your browser.' %}");
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

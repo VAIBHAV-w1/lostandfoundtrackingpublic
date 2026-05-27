@@ -1,0 +1,95 @@
+{% extends 'tracker/base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Platform Guide — LostFound" %}{% endblock %}
+
+{% block content %}
+<div class="page-header animate-slide-up" style="text-align: center; margin-bottom: 64px;">
+    <p style="color: var(--brand-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; margin-bottom: 12px;">{% trans "System Information" %}</p>
+    <h1 style="font-size: 3rem; line-height: 1.15; letter-spacing: -0.03em;">{% trans "Platform Overview & Guides" %}</h1>
+    <p style="color: var(--text-secondary); max-width: 600px; margin: 16px auto 0; font-size: 1.05rem; line-height: 1.6;">
+        {% trans "Technical documentation and step-by-step instructions for operating the LostFound asset coordination system." %}
+    </p>
+</div>
+
+<div class="grid animate-slide-up delay-1" style="grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 64px; align-items: start;">
+    <!-- System Operation Instructions -->
+    <div class="card" style="height: 100%;">
+        <div class="card-header">
+            <h3 class="card-title">{% trans "User Operating Guide" %}</h3>
+        </div>
+        <div class="card-body" style="display: flex; flex-direction: column; gap: 24px;">
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9rem;">1</div>
+                <div>
+                    <h4 style="font-size: 1.05rem; margin-bottom: 6px;">{% trans "Register / Authenticate Account" %}</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "Create an account using a verified email address. Complete the two-factor OTP authentication step to secure your dashboard." %}</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9rem;">2</div>
+                <div>
+                    <h4 style="font-size: 1.05rem; margin-bottom: 6px;">{% trans "Log Asset Reports" %}</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "Navigate to the Report Item module. Input the item name, category, date, and descriptions. Set a visual attachment if available." %}</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9rem;">3</div>
+                <div>
+                    <h4 style="font-size: 1.05rem; margin-bottom: 6px;">{% trans "Geospatial Pinpointing" %}</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "Click 'Get Accurate Location' or drag the map marker to indicate coordinates. The system reverse-geocodes coordinates into addresses." %}</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--border-subtle); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9rem;">4</div>
+                <div>
+                    <h4 style="font-size: 1.05rem; margin-bottom: 6px;">{% trans "Coordinate Recovery" %}</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "Search the directory using categorical filters. Connect with the reporter using secure, localized messaging to verify and schedule recovery." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Specifications -->
+    <div class="card" style="height: 100%;">
+        <div class="card-header">
+            <h3 class="card-title">{% trans "Platform Specifications" %}</h3>
+        </div>
+        <div class="card-body" style="display: flex; flex-direction: column; gap: 24px;">
+            <div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--brand-primary);">{% trans "Mapping & Geofencing" %}</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "Integrates Leaflet.js mapping using OpenStreetMap data layers. Restricts coordinates dynamically to regional geofences to maintain local context." %}</p>
+            </div>
+            
+            <div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--brand-accent);">{% trans "Automated Proximity Matching" %}</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "The matching algorithm calculates distances using Haversine trigonometric formulas. Users are notified if matching categories appear within a 10km radius." %}</p>
+            </div>
+
+            <div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--status-found);">{% trans "Communication Hub" %}</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">{% trans "Features a peer-to-peer internal system allowing secure messaging between reporters and searchers without exposing email addresses or phone numbers." %}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card animate-slide-up delay-2" style="background: var(--bg-card); text-align: center; border-radius: var(--radius-xl); overflow: hidden;">
+    <div class="card-body" style="padding: 48px 32px;">
+        <h2 style="font-size: 2rem; margin-bottom: 8px; font-weight: 700;">{% trans "Directory Actions" %}</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; font-size: 1rem;">
+            {% trans "Access the platform to check mapped activities or search specific logged items." %}
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="{% url 'tracker:signup' %}" class="btn btn-primary" style="padding: 12px 32px;">
+                {% trans "Register Account" %}
+            </a>
+            <a href="{% url 'tracker:search' %}" class="btn btn-secondary" style="padding: 12px 32px;">
+                {% trans "Browse Directory" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

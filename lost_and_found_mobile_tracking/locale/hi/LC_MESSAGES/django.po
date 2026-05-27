@@ -1,0 +1,776 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-01 12:00+0000\n"
+"PO-Revision-Date: 2023-01-01 12:00+0000\n"
+"Last-Translator: Auto\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Mark as Resolved"
+msgstr "सही के रूप में चिन्हित करो"
+
+msgid "Start a conversation regarding this item."
+msgstr "इस आइटम के संबंध में बातचीत शुरू करें."
+
+msgid "Sync Transmission"
+msgstr "सिंक ट्रांसमिशन"
+
+msgid "How can people contact you? (Email/Phone)"
+msgstr "लोग आपसे कैसे संपर्क कर सकते हैं? (ईमेल/फ़ोन)"
+
+msgid "Support Message from %(name)s"
+msgstr "%(नाम)s से समर्थन संदेश"
+
+msgid "Documents"
+msgstr "दस्तावेज़"
+
+msgid "Submit Report"
+msgstr "रिपोर्ट सबमिट करें"
+
+msgid "Describe your inquiry..."
+msgstr "अपनी पूछताछ का वर्णन करें..."
+
+msgid "Your OTP is %(code)s.\\nThis code expires in 5 minutes."
+msgstr "आपका OTP %(code)s है.\\nयह कोड 5 मिनट में समाप्त हो जाता है."
+
+msgid "Report Item"
+msgstr "रिपोर्ट आइटम"
+
+msgid "Register your operative credentials on the grid."
+msgstr "ग्रिड पर अपने ऑपरेटिव क्रेडेंशियल पंजीकृत करें।"
+
+msgid "Identity Verification — LostFound"
+msgstr "पहचान सत्यापन - खोया हुआ"
+
+msgid "Signup successful! Please verify the OTP sent to your email."
+msgstr "सफल पंजीकरण! कृपया अपने ईमेल पर भेजे गए ओटीपी को सत्यापित करें।"
+
+msgid "Send Transmission"
+msgstr "ट्रांसमिशन भेजें"
+
+msgid "Photo"
+msgstr "तस्वीर"
+
+msgid "Recovery Protocol"
+msgstr "पुनर्प्राप्ति प्रोटोकॉल"
+
+msgid "Access Key"
+msgstr "प्रवेश की चाबी"
+
+msgid "Enter username"
+msgstr "उपयोक्तानाम दर्ज करें"
+
+msgid "Send"
+msgstr "भेजना"
+
+msgid "Report Details"
+msgstr "रिपोर्ट विवरण"
+
+msgid "System Overview"
+msgstr "तंत्र अवलोकन"
+
+msgid "When was the item lost/found?"
+msgstr "वस्तु कब खोयी/पायी गयी?"
+
+msgid "Clothing"
+msgstr "वस्त्र"
+
+msgid "Return to Authentication"
+msgstr "प्रमाणीकरण पर लौटें"
+
+msgid "Profile Picture"
+msgstr "प्रोफ़ाइल फोटो"
+
+msgid "No recent deployments."
+msgstr "कोई हालिया तैनाती नहीं."
+
+msgid "New to the grid?"
+msgstr "ग्रिड में नए?"
+
+msgid "Discover"
+msgstr "खोज करना"
+
+msgid "Invalid credentials."
+msgstr "अवैध प्रत्यय पत्र।"
+
+msgid "Email Descriptor"
+msgstr "ईमेल डिस्क्रिप्टर"
+
+msgid "Security Key"
+msgstr "सुरक्षा कुंजी"
+
+msgid "Item marked as resolved."
+msgstr "आइटम को समाधान के रूप में चिह्नित किया गया."
+
+msgid "Your Reports"
+msgstr "आपकी रिपोर्ट"
+
+msgid "Pet"
+msgstr "पालतू"
+
+msgid "Status"
+msgstr "स्थिति"
+
+msgid "No account found with that email."
+msgstr "उस ईमेल के साथ कोई खाता नहीं मिला."
+
+msgid "View"
+msgstr "देखना"
+
+msgid "All"
+msgstr "सभी"
+
+msgid "Found an item"
+msgstr "एक वस्तु मिली"
+
+msgid "Discover Items"
+msgstr "आइटम खोजें"
+
+msgid "New Deployment"
+msgstr "नई तैनाती"
+
+msgid "Monitor real-time asset recovery across the Karnataka grid."
+msgstr ""
+"पूरे कर्नाटक ग्रिड में वास्तविक समय में परिसंपत्ति पुनर्प्राप्ति की निगरानी "
+"करें।"
+
+msgid "Detecting location..."
+msgstr "स्थान का पता लगाया जा रहा है..."
+
+msgid "Longitude"
+msgstr "देशान्तर"
+
+msgid "Passwords do not match."
+msgstr "सांकेतिक शब्द मेल नहीं खाते।"
+
+msgid "Wallet / Purse"
+msgstr "बटुआ/पर्स"
+
+msgid "Color, brand, unique marks..."
+msgstr "रंग, ब्रांड, अद्वितीय चिह्न..."
+
+msgid "Login 2FA"
+msgstr "2FA लॉगिन करें"
+
+msgid "Description"
+msgstr "विवरण"
+
+msgid "Required for communication and recovery notifications."
+msgstr "संचार और पुनर्प्राप्ति सूचनाओं के लिए आवश्यक."
+
+msgid ""
+"Direct node-to-node communication channels for verifying ownership and "
+"arranging recovery."
+msgstr ""
+"स्वामित्व की पुष्टि करने और पुनर्प्राप्ति की व्यवस्था करने के लिए सीधे "
+"नोड-टू-नोड संचार चैनल।"
+
+msgid "Sync your credentials to access the grid."
+msgstr "ग्रिड तक पहुंचने के लिए अपने क्रेडेंशियल सिंक करें।"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Enter the 6-digit synchronization code."
+msgstr "6-अंकीय सिंक्रोनाइज़ेशन कोड दर्ज करें।"
+
+msgid "e.g. Rahul Sharma"
+msgstr "जैसे राहुल शर्मा"
+
+msgid "Accessories"
+msgstr "सामान"
+
+msgid "Account Information"
+msgstr "खाता संबंधी जानकारी"
+
+msgid "Important Document"
+msgstr "महत्वपूर्ण दस्तावेज़"
+
+msgid "Your account is not verified. A new OTP has been sent."
+msgstr "आपका खाता सत्यापित नहीं है. एक नया ओटीपी भेजा गया है."
+
+msgid "Message Reporter"
+msgstr "संदेश रिपोर्टर"
+
+msgid "Timestamp"
+msgstr "समय-चिह्न"
+
+msgid "Recipient"
+msgstr "प्राप्तकर्ता"
+
+msgid ""
+"Whether it's a misplaced device, a lost pet, or a found wallet, LostFound "
+"provides the professional platform required to close the loop on every "
+"incident."
+msgstr ""
+"चाहे वह खोया हुआ उपकरण हो, खोया हुआ पालतू जानवर हो, या पाया गया बटुआ हो, "
+"लॉस्टफाउंड हर घटना पर लूप को बंद करने के लिए आवश्यक पेशेवर मंच प्रदान करता "
+"है।"
+
+msgid "e.g., iPhone 13 Pro Max - Blue"
+msgstr "उदाहरण के लिए, iPhone 13 Pro Max - नीला"
+
+msgid "Geolocation not supported by your browser."
+msgstr "जियोलोकेशन आपके ब्राउज़र द्वारा समर्थित नहीं है."
+
+msgid "Search Grid"
+msgstr "ग्रिड खोजें"
+
+msgid "Successfully reported: %(title)s"
+msgstr "सफलतापूर्वक रिपोर्ट किया गया: %(शीर्षक)s"
+
+msgid "Privacy Policy"
+msgstr "गोपनीयता नीति"
+
+msgid "Date Reported"
+msgstr "दिनांक रिपोर्ट की गई"
+
+msgid "Name: %(name)s\\nEmail: %(email)s\\n\\nMessage:\\n%(message)s"
+msgstr "नाम: %(नाम)s\\nईमेल: %(ईमेल)s\\n\\nसंदेश:\\n%(संदेश)s"
+
+msgid "Pets"
+msgstr "पालतू जानवर"
+
+msgid ""
+"We aim to create a world where nothing is truly lost. By leveraging "
+"community intelligence and precision mapping, we build a safety net for your"
+" personal assets."
+msgstr ""
+"हमारा लक्ष्य एक ऐसी दुनिया बनाना है जहां वास्तव में कुछ भी न खोए। सामुदायिक "
+"बुद्धिमत्ता और सटीक मानचित्रण का लाभ उठाकर, हम आपकी व्यक्तिगत संपत्तियों के "
+"लिए एक सुरक्षा जाल बनाते हैं।"
+
+msgid "Initiate Recovery"
+msgstr "पुनर्प्राप्ति आरंभ करें"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "Email verified! You can now sign in."
+msgstr "ईमेल सत्यापित! अब आप साइन इन कर सकते हैं."
+
+msgid "Explore Full Matrix"
+msgstr "पूर्ण मैट्रिक्स का अन्वेषण करें"
+
+msgid "Message sent."
+msgstr "संदेश भेजा गया।"
+
+msgid "Verify Your LostFound Account"
+msgstr "अपना खोया हुआ खाता सत्यापित करें"
+
+msgid "Our Operational Goal"
+msgstr "हमारा परिचालन लक्ष्य"
+
+msgid "Already registered?"
+msgstr "पहले से ही पंजीकृत?"
+
+msgid "Account"
+msgstr "खाता"
+
+msgid "No image provided"
+msgstr "कोई छवि प्रदान नहीं की गई"
+
+msgid "Keyword"
+msgstr "कीवर्ड"
+
+msgid "Location Name"
+msgstr "स्थान का नाम"
+
+msgid "Sign In to Message"
+msgstr "संदेश में साइन इन करें"
+
+msgid "Sign In"
+msgstr "दाखिल करना"
+
+msgid "Accuracy"
+msgstr "शुद्धता"
+
+msgid "Electronics"
+msgstr "इलेक्ट्रानिक्स"
+
+msgid "Read"
+msgstr "पढ़ना"
+
+msgid "Secure Messaging"
+msgstr "सुरक्षित संदेश सेवा"
+
+msgid "Recent Activity"
+msgstr "हाल की गतिविधि"
+
+msgid "Date"
+msgstr "तारीख"
+
+msgid "Verify Node"
+msgstr "नोड सत्यापित करें"
+
+msgid "Geospatial Index"
+msgstr "भू-स्थानिक सूचकांक"
+
+msgid "Full Name"
+msgstr "पूरा नाम"
+
+msgid "Contact Us"
+msgstr "हमसे संपर्क करें"
+
+msgid "Please wait 30 seconds before resending."
+msgstr "कृपया पुनः भेजने से पहले 30 सेकंड प्रतीक्षा करें।"
+
+msgid "Contact Info"
+msgstr "संपर्क सूचना"
+
+msgid "Address"
+msgstr "पता"
+
+msgid "User Profile"
+msgstr "उपयोगकर्ता रूपरेखा"
+
+msgid "Total Messages"
+msgstr "कुल संदेश"
+
+msgid "Sender"
+msgstr "प्रेषक"
+
+msgid "Invalid or expired OTP."
+msgstr "अमान्य या समाप्त हो चुका ओटीपी."
+
+msgid "OTP resent successfully."
+msgstr "ओटीपी सफलतापूर्वक पुनः भेजा गया।"
+
+msgid "Item"
+msgstr "वस्तु"
+
+msgid "Occurrence Date"
+msgstr "घटना दिनांक"
+
+msgid "Lost an item"
+msgstr "एक वस्तु खो गयी"
+
+msgid "Redefining"
+msgstr "पुनर्परिभाषित"
+
+msgid "Message sent successfully! We will contact you soon."
+msgstr "संदेश सफलतापूर्वक भेजा गया! हम आपसे शीघ्र ही संपर्क करेंगे।"
+
+msgid "Platform"
+msgstr "प्लैटफ़ॉर्म"
+
+msgid "Coordinates"
+msgstr "COORDINATES"
+
+msgid "Conversation regarding"
+msgstr "के संबंध में बातचीत"
+
+msgid "Forgot key?"
+msgstr "चाबी भूल गए?"
+
+msgid "Choose username"
+msgstr "उपयोगकर्ता नाम का चयन करें"
+
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+msgid "Electronics / Mobile"
+msgstr "इलेक्ट्रॉनिक्स/मोबाइल"
+
+msgid "Keys"
+msgstr "कुंजियाँ"
+
+msgid "name@domain.com"
+msgstr "name@domain.com"
+
+msgid "Email Registry"
+msgstr "ईमेल रजिस्ट्री"
+
+msgid "Phone number or Email"
+msgstr "फ़ोन नंबर या ईमेल"
+
+msgid "Activate Node"
+msgstr "नोड सक्रिय करें"
+
+msgid "View Report"
+msgstr "रिपोर्ट देखें"
+
+msgid "Provide accurate details to help in the recovery process."
+msgstr "पुनर्प्राप्ति प्रक्रिया में सहायता के लिए सटीक विवरण प्रदान करें।"
+
+msgid "Log Out"
+msgstr "लॉग आउट"
+
+msgid "Password reset successful. Please sign in."
+msgstr "पासवर्ड रीसेट सफल. साइन इन करें।"
+
+msgid "Username Identity"
+msgstr "उपयोगकर्ता नाम पहचान"
+
+msgid "Resolved"
+msgstr "हल किया"
+
+msgid "No pending session."
+msgstr "कोई लंबित सत्र नहीं."
+
+msgid "About Us"
+msgstr "हमारे बारे में"
+
+msgid "View Details"
+msgstr "विवरण देखें"
+
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+msgid "Latitude"
+msgstr "अक्षांश"
+
+msgid "Verify Key"
+msgstr "कुंजी सत्यापित करें"
+
+msgid "Type"
+msgstr "प्रकार"
+
+msgid "Initialize Node"
+msgstr "नोड आरंभ करें"
+
+msgid "Item Date"
+msgstr "आइटम दिनांक"
+
+msgid "Password Reset"
+msgstr "पासवर्ड रीसेट"
+
+msgid "Location accuracy in meters"
+msgstr "मीटर में स्थान सटीकता"
+
+msgid "Transmission Content"
+msgstr "ट्रांसमिशन सामग्री"
+
+msgid "You haven't reported any items yet."
+msgstr "आपने अभी तक किसी आइटम की रिपोर्ट नहीं की है."
+
+msgid "Recovery"
+msgstr "वसूली"
+
+msgid "Get in Touch"
+msgstr "संपर्क में रहो"
+
+msgid "Back to Discover"
+msgstr "डिस्कवर पर वापस जाएँ"
+
+msgid "Regional HQ"
+msgstr "क्षेत्रीय मुख्यालय"
+
+msgid "Error"
+msgstr "गलती"
+
+msgid "Report Type"
+msgstr "आख्या की प्रकार"
+
+msgid "Geospatial Precision"
+msgstr "भू-स्थानिक परिशुद्धता"
+
+msgid "Signup Verification"
+msgstr "साइनअप सत्यापन"
+
+msgid "Verification code sent to your email."
+msgstr "सत्यापन कोड आपके ईमेल पर भेजा गया।"
+
+msgid "Write a message..."
+msgstr "एक सन्देश लिखिए..."
+
+msgid ""
+"Drop a pin at the location within Karnataka where the item was lost or "
+"found."
+msgstr ""
+"कर्नाटक के भीतर उस स्थान पर एक पिन डालें जहां आइटम खो गया था या पाया गया था।"
+
+msgid "No matching items found."
+msgstr "कोई मेल खाने वाला आइटम नहीं मिला."
+
+msgid ""
+"Advanced indexing of lost and found assets using high-accuracy regional map "
+"coordination."
+msgstr ""
+"उच्च सटीकता वाले क्षेत्रीय मानचित्र समन्वय का उपयोग करके खोई और पाई गई "
+"संपत्तियों का उन्नत अनुक्रमण।"
+
+msgid "Body"
+msgstr "शरीर"
+
+msgid "Report"
+msgstr "प्रतिवेदन"
+
+msgid "Messages"
+msgstr "संदेशों"
+
+msgid "Identity Verification"
+msgstr "पहचान सत्यापन"
+
+msgid ""
+"Robust verification protocols ensuring all reporting nodes are authorized "
+"and legitimate."
+msgstr ""
+"मजबूत सत्यापन प्रोटोकॉल यह सुनिश्चित करते हैं कि सभी रिपोर्टिंग नोड अधिकृत "
+"और वैध हैं।"
+
+msgid "Reset Your LostFound Password"
+msgstr "अपना खोया हुआ पासवर्ड रीसेट करें"
+
+msgid "Other"
+msgstr "अन्य"
+
+msgid "Item Title"
+msgstr "मद शीर्षक"
+
+msgid "Search for lost and found items across Karnataka."
+msgstr "पूरे कर्नाटक में खोई और पाई गई वस्तुओं की खोज करें।"
+
+msgid "Reset your access key via registered email."
+msgstr "पंजीकृत ईमेल के माध्यम से अपनी एक्सेस कुंजी रीसेट करें।"
+
+msgid "Search address or select on map"
+msgstr "पता खोजें या मानचित्र पर चुनें"
+
+msgid "Title"
+msgstr "शीर्षक"
+
+msgid ""
+"LostFound is a dedicated professional utility designed to synchronize and "
+"streamline asset recovery across the Karnataka regional grid."
+msgstr ""
+"लॉस्टफाउंड एक समर्पित पेशेवर उपयोगिता है जिसे कर्नाटक क्षेत्रीय ग्रिड में "
+"संपत्ति वसूली को सिंक्रनाइज़ और सुव्यवस्थित करने के लिए डिज़ाइन किया गया है।"
+
+msgid "Support"
+msgstr "सहायता"
+
+msgid "Location description or select on map"
+msgstr "स्थान का विवरण या मानचित्र पर चयन करें"
+
+msgid "Authorize Session"
+msgstr "सत्र अधिकृत करें"
+
+msgid "Initialize Your Account"
+msgstr "अपना खाता प्रारंभ करें"
+
+msgid "Recovery Protocol — LostFound"
+msgstr "पुनर्प्राप्ति प्रोटोकॉल - लॉस्टफ़ाउंड"
+
+msgid "Username or Email already exists."
+msgstr "उपयोगकर्ता नाम या ईमेल पहले से मौजूद है."
+
+msgid "Contact"
+msgstr "संपर्क"
+
+msgid "Central"
+msgstr "मध्य"
+
+msgid "Bengaluru, Karnataka, India"
+msgstr "बेंगलुरु, कर्नाटक, भारत"
+
+msgid "Verification Code"
+msgstr "सत्यापन कोड"
+
+msgid "Registry Email"
+msgstr "रजिस्ट्री ईमेल"
+
+msgid "Active Cases"
+msgstr "एक्टिव केस"
+
+msgid "Category"
+msgstr "वर्ग"
+
+msgid "Contact Information"
+msgstr "संपर्क जानकारी"
+
+msgid "Found"
+msgstr "मिला"
+
+msgid "Your LostFound Login Code"
+msgstr "आपका खोया हुआ लॉगिन कोड"
+
+msgid "I have..."
+msgstr "मेरे पास है..."
+
+msgid "Active"
+msgstr "सक्रिय"
+
+msgid ""
+"The code was transmitted to your registered channel. It expires in 10 "
+"minutes."
+msgstr ""
+"कोड आपके पंजीकृत चैनल पर प्रसारित किया गया था। यह 10 मिनट में समाप्त हो जाता"
+" है."
+
+msgid "Identity Sync"
+msgstr "पहचान समन्वयन"
+
+msgid "Lost"
+msgstr "खो गया"
+
+msgid ""
+"Have questions about our recovery protocols or need assistance with your "
+"node synchronization? Our team is available 24/7."
+msgstr ""
+"क्या हमारे पुनर्प्राप्ति प्रोटोकॉल के बारे में कोई प्रश्न हैं या आपको अपने "
+"नोड सिंक्रनाइज़ेशन में सहायता की आवश्यकता है? हमारी टीम 24/7 उपलब्ध है।"
+
+msgid "Total Deployments"
+msgstr "कुल तैनाती"
+
+msgid "Use My Location"
+msgstr "मेरे स्थान का उपयोग करें"
+
+msgid "Search items..."
+msgstr "आइटम खोजें..."
+
+msgid "Bag / Luggage"
+msgstr "बैग/सामान"
+
+msgid "Welcome Back"
+msgstr "वापसी पर स्वागत है"
+
+msgid ""
+"The standard for asset recovery in Karnataka. Professional, secure, and "
+"efficient."
+msgstr "कर्नाटक में संपत्ति वसूली के लिए मानक। पेशेवर, सुरक्षित और कुशल।"
+
+msgid "LostFound"
+msgstr "खोया पाया"
+
+msgid "Wallet"
+msgstr "बटुआ"
+
+msgid "Bag"
+msgstr "थैला"
+
+msgid "Find Items"
+msgstr "आइटम ढूंढें"
+
+msgid "Sign in"
+msgstr "दाखिल करना"
+
+msgid "Sign out"
+msgstr "साइन आउट"
+
+msgid "Get started"
+msgstr "शुरू हो जाओ"
+
+msgid "Company"
+msgstr "कंपनी"
+
+msgid "Terms of Service"
+msgstr "सेवा की शर्तें"
+
+msgid "Status: Online"
+msgstr "स्थिति: ऑनलाइन"
+
+msgid "Version 1.0.4"
+msgstr "संस्करण 1.0.4"
+
+msgid "My Account"
+msgstr "मेरा खाता"
+
+msgid "My Reports"
+msgstr "मेरी रिपोर्ट"
+
+msgid "Unread Messages"
+msgstr "अपठित संदेश"
+
+msgid "LostFound Assistant"
+msgstr "खोया हुआ सहायक"
+
+msgid "Done"
+msgstr "हो गया"
+
+msgid "Resolve"
+msgstr "संकल्प"
+
+msgid "No reports yet"
+msgstr "अभी तक कोई रिपोर्ट नहीं"
+
+msgid "Report your first item"
+msgstr "अपने पहले आइटम की रिपोर्ट करें"
+
+msgid "No messages yet"
+msgstr "अभी तक कोई संदेश नहीं"
+
+msgid "Search items…"
+msgstr "आइटम खोजें…"
+
+msgid "Toggle Theme"
+msgstr "थीम टॉगल करें"
+
+msgid "Password"
+msgstr "पासवर्ड"
+
+msgid "Forgot Password?"
+msgstr "पासवर्ड भूल गए?"
+
+msgid "No account?"
+msgstr "खाता नहीं?"
+
+msgid "Create one free →"
+msgstr "एक निःशुल्क बनाएं →"
+
+msgid "Verify Now"
+msgstr "अभी सत्यापित करें"
+
+msgid "Enter Code"
+msgstr "कोड दर्ज करें"
+
+msgid "OTP Verified!"
+msgstr "ओटीपी सत्यापित!"
+
+msgid "Case Info"
+msgstr "मामले की जानकारी"
+
+msgid "Safety tip:"
+msgstr "सुरक्षा युक्ति:"
+
+msgid "Always meet in public, well-lit locations for handovers."
+msgstr "हैंडओवर के लिए हमेशा सार्वजनिक, अच्छी रोशनी वाले स्थानों पर मिलें।"
+
+msgid "Start the conversation"
+msgstr "बातचीत शुरू करें"
+
+msgid "Introduce yourself and explain how you can help."
+msgstr "अपना परिचय दें और बताएं कि आप कैसे मदद कर सकते हैं।"
+
+msgid "Type a message…"
+msgstr "एक संदेश टाइप करें..."
+
+msgid "Re:"
+msgstr "दोबारा:"
+
+msgid "Precision:"
+msgstr "शुद्धता:"
+
+msgid "View →"
+msgstr "देखें →"
+
+msgid "No recent activity yet"
+msgstr "अभी तक कोई हालिया गतिविधि नहीं"
+
+msgid "Location"
+msgstr "जगह"
+
+msgid "Photo & Contact"
+msgstr "फोटो एवं संपर्क"
+
+msgid "Incident Date"
+msgstr "घटना दिनांक"
+
+msgid "Report an Item"
+msgstr "किसी आइटम की रिपोर्ट करें"
+
+msgid "About"
+msgstr "के बारे में"
+
+msgid "New Report"
+msgstr "नई रिपोर्ट"
+
+msgid "+ New"
+msgstr "+ नया"

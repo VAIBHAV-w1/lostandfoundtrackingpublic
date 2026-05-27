@@ -1,0 +1,50 @@
+{% extends 'tracker/base.html' %}
+{% load static i18n %}
+{% block title %}{% trans "Join the Network — LostFound" %}{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper animate-slide-up" style="min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center;">
+    <div class="card auth-card" style="box-shadow: 0 32px 64px -16px rgba(0,0,0,0.3); border-radius: var(--radius-xl); max-width: 500px;">
+        <div class="card-header" style="flex-direction: column; align-items: center; text-align: center; padding: 48px 40px 24px; border: none;">
+            <div class="logo-icon" style="width: 56px; height: 56px; margin-bottom: 24px; font-size: 1.5rem;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h2 style="font-size: 2rem; margin-bottom: 8px;">{% trans "Create Account" %}</h2>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">{% trans "Join the network to start coordinating asset recovery." %}</p>
+        </div>
+        <div class="card-body" style="padding: 0 40px 40px;">
+            <form method="post" action="{% url 'tracker:signup' %}" class="grid" style="gap: 20px;">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label" for="username">{% trans "Username" %}</label>
+                    <input type="text" name="username" id="username" class="form-control form-control-lg" placeholder="{% trans 'Choose a unique username' %}" required autofocus style="height: 52px;">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">{% trans "Email Address" %}</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="{% trans 'name@example.com' %}" required style="height: 52px;">
+                </div>
+                <div class="grid-2" style="gap: 16px;">
+                    <div class="form-group">
+                        <label class="form-label" for="password1">{% trans "Password" %}</label>
+                        <input type="password" name="password1" id="password1" class="form-control form-control-lg" placeholder="••••••••" required style="height: 52px;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="password2">{% trans "Confirm" %}</label>
+                        <input type="password" name="password2" id="password2" class="form-control form-control-lg" placeholder="••••••••" required style="height: 52px;">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; height: 56px; font-size: 1.1rem; margin-top: 12px;">
+                    {% trans "Create Account" %}
+                </button>
+            </form>
+            
+            <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-subtle); text-align: center;">
+                <p style="font-size: 0.95rem; color: var(--text-secondary);">
+                    {% trans "Already have an account?" %} 
+                    <a href="{% url 'tracker:login' %}" style="color: var(--brand-primary); font-weight: 800; margin-left: 4px;">{% trans "Sign In" %}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'tracker/base.html' %}
+{% load static i18n %}
+{% block title %}{{ report.title }} — {% trans "Item Details" %}{% endblock %}
+
+{% block content %}
+<div class="page-header animate-slide-up" style="margin-bottom: 40px;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+        <a href="{% url 'tracker:search' %}" style="color: var(--brand-primary);">{% trans "Network Directory" %}</a>
+        <span style="color: var(--text-muted);">/</span>
+        <span style="color: var(--text-secondary);">{% trans "Report" %} #{{ report.id }}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                {% if report.report_type == 'lost' %}
+                    <span class="badge" style="background: var(--status-lost); color: white; padding: 6px 16px; font-size: 0.8rem;">{% trans "Lost Item" %}</span>
+                {% else %}
+                    <span class="badge" style="background: var(--status-found); color: white; padding: 6px 16px; font-size: 0.8rem;">{% trans "Found Item" %}</span>
+                {% endif %}
+                <span class="badge" style="background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 6px 16px; font-size: 0.8rem;">{{ report.get_category_display }}</span>
+            </div>
+            <h1 style="font-size: 3.5rem; line-height: 1.1;">{{ report.title }}</h1>
+        </div>
+        <div style="text-align: right;">
+            <p style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 800; margin-bottom: 8px;">{% trans "Timestamp" %}</p>
+            <p style="font-weight: 800; font-size: 1.25rem; font-family: var(--font-heading);">{{ report.date_reported|date:"M d, Y" }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="grid-2 animate-slide-up delay-1" style="grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start;">
+    <div class="grid" style="gap: 40px;">
+        <!-- Visual Presentation -->
+        <div class="card" style="overflow: hidden; background: #000; border: none; box-shadow: var(--shadow-lg); border-radius: var(--radius-xl);">
+            {% if report.photo %}
+                <img src="{{ report.photo.url }}" style="width: 100%; height: auto; max-height: 700px; object-fit: contain; display: block; margin: 0 auto;">
+            {% else %}
+                <div style="width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); background: var(--bg-card);">
+                    <div style="text-align: center;">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="opacity: 0.3; margin-bottom: 24px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        <p style="font-weight: 700; font-size: 1.1rem; opacity: 0.5;">{% trans "No visual evidence provided" %}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Comprehensive Details -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% trans "Report Intelligence" %}</h3>
+            </div>
+            <div class="card-body">
+                <p style="white-space: pre-wrap; color: var(--text-primary); font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px;">{{ report.description }}</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; padding-top: 40px; border-top: 1px solid var(--border-subtle);">
+                    <div>
+                        <p style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; margin-bottom: 12px;">{% trans "Observation Date" %}</p>
+                        <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            {{ report.item_date|date:"F d, Y"|default:"N/A" }}
+                        </div>
+                    </div>
+                    <div>
+                        <p style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; margin-bottom: 12px;">{% trans "Category" %}</p>
+                        <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand-accent)" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            {{ report.get_category_display }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid" style="gap: 40px;">
+        <!-- Geospatial Visualization -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% trans "Spatial Context" %}</h3>
+            </div>
+            <div class="card-body" style="padding: 0;">
+                <div id="map" class="map-container" style="height: 320px; border: none; border-radius: 0;"></div>
+                <div style="padding: 24px; background: var(--bg-card);">
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--status-lost)" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>{{ report.location_name }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Channel -->
+        <div class="card" style="border: 2px solid var(--brand-primary); box-shadow: var(--shadow-glow); background: linear-gradient(180deg, var(--bg-card) 0%, rgba(99, 102, 241, 0.03) 100%);">
+            <div class="card-header" style="border-bottom-color: rgba(99, 102, 241, 0.1);">
+                <h3 class="card-title">{% trans "Recovery Coordination" %}</h3>
+            </div>
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                    {% if user != report.user %}
+                        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5;">{% trans "Securely message the reporter to coordinate item recovery or verification." %}</p>
+                        <form method="post" action="{% url 'tracker:send_message' report.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea name="body" class="form-control" placeholder="{% trans 'Write your coordination message...' %}" required style="min-height: 120px; background: var(--bg-main);"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 8px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                                {% trans "Send Message" %}
+                            </button>
+                        </form>
+                    {% else %}
+                        <div style="padding: 24px; background: var(--status-active-bg); border-radius: var(--radius-md); color: var(--status-active); font-weight: 700; text-align: center; border: 1px solid rgba(59, 130, 246, 0.2);">
+                            {% trans "Identity Verified: You are the reporter." %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div style="text-align: center; padding: 8px 0;">
+                        <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 24px;">{% trans "Authentication required to contact reporter." %}</p>
+                        <a href="{% url 'tracker:login' %}" class="btn btn-primary btn-lg" style="width: 100%;">{% trans "Sign In to Connect" %}</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Reporter Metadata -->
+        <div class="card">
+            <div class="card-body" style="padding: 24px; display: flex; align-items: center; gap: 20px;">
+                <div style="width: 56px; height: 56px; border-radius: 16px; background: var(--bg-main); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--brand-primary); font-size: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div>
+                    <p style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; margin-bottom: 4px;">{% trans "Reporter" %}</p>
+                    <p style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">{{ report.user.username }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Map Infrastructure -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        {% if report.latitude and report.longitude %}
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const mapStyle = isDark ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+            
+            const map = L.map('map', { 
+                zoomControl: false,
+                attributionControl: false,
+                scrollWheelZoom: false
+            }).setView([{{ report.latitude }}, {{ report.longitude }}], 15);
+            
+            L.tileLayer(mapStyle).addTo(map);
+            
+            const color = "{{ report.report_type }}" === 'lost' ? '#f43f5e' : '#10b981';
+            L.circleMarker([{{ report.latitude }}, {{ report.longitude }}], {
+                radius: 14,
+                fillColor: color,
+                color: '#fff',
+                weight: 4,
+                opacity: 1,
+                fillOpacity: 1
+            }).addTo(map);
+        {% endif %}
+    });
+</script>
+{% endblock %}
